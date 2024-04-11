@@ -34,6 +34,7 @@ public class CallbackServer {
     private static final int StatusInvalidToken   = 20;
     private static final int StatusInternalError  = 30;
 
+    private static final int TypePing     = 0;
     private static final int TypeKeyGen     = 1;
     private static final int TypeKeySign    = 2;
     private static final int TypeKeyReshare = 3;
@@ -134,6 +135,16 @@ public class CallbackServer {
                 .signWith(key, signAlg);
 
         return builder.compact();
+    }
+
+    private String processPingRequest() {
+        try {
+            CallBackResponse rsp = new CallBackResponse(StatusOK, "", "", "");
+            return createResponseToken(rsp);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return create_error_token(StatusInternalError, e.toString());
+        }
     }
 
     private String process_keygen_request(String request_id, String request_detail, String extra_info) {
@@ -268,7 +279,7 @@ public class CallbackServer {
             return create_error_token(StatusInvalidToken, e.toString());
         }
 
-        try{
+        try {
             byte[] payload = Base64.getDecoder().decode(package_data.getBytes());
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -276,11 +287,13 @@ public class CallbackServer {
 
             // first check if the request has already been deal with
             CallBackResponse rst = rspMemStorage.get(req.request_id);
-            if ( rst != null){
+            if ( rst != null) {
                 return createResponseToken(rst);
             }
 
             switch (req.request_type) {
+                case TypePing:
+                    return processPingRequest();
                 case TypeKeyGen:
                     return process_keygen_request(req.request_id, req.request_detail, req.extra_info);
                 case TypeKeySign:

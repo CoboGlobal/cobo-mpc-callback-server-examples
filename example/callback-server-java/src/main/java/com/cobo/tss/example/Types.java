@@ -152,9 +152,12 @@ class KeyGenDetail implements Serializable{
     }
 }
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class KeyGenExtraInfo implements Serializable{
     @JsonProperty("cobo_id")
     public String coboID;
+    @JsonProperty("api_request_id")
+    public String apiRequestID;
 
     public String getCoboID() {
         return coboID;
@@ -162,6 +165,14 @@ class KeyGenExtraInfo implements Serializable{
 
     public void setCoboID(String coboID) {
         this.coboID = coboID;
+    }
+
+    public String getApiRequestID() {
+        return apiRequestID;
+    }
+
+    public void setApiRequestID(String apiRequestID) {
+        this.apiRequestID = apiRequestID;
     }
 }
 
@@ -184,6 +195,12 @@ class KeySignDetail implements Serializable{
 
     @JsonProperty("tweak_list")
     public String[] tweakList;
+
+    @JsonProperty("signature_type")
+    public int signatureType;
+
+    @JsonProperty("tss_protocol")
+    public int tssProtocol;
 
     @JsonProperty("task_id")
     public String taskID;
@@ -236,6 +253,18 @@ class KeySignDetail implements Serializable{
         this.tweakList = tweakList;
     }
 
+    public int getSignatureType() {
+        return signatureType;
+    }
+
+    public void setSignatureType(int signatureType) { this.signatureType = signatureType; }
+
+    public int getTssProtocol() {
+        return tssProtocol;
+    }
+
+    public void setTssProtocol(int tssProtocol) { this.tssProtocol = tssProtocol; }
+
     public String getTaskID() {
         return taskID;
     }
@@ -262,6 +291,7 @@ enum TransactionOperation
     CONTRACT_CALL, // 200
 }
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class KeySignExtraInfo implements Serializable {
     @JsonProperty("cobo_id")
     public String coboID;
@@ -303,10 +333,20 @@ class KeySignExtraInfo implements Serializable {
     @JsonProperty("api_key")
     public String apiKey;
     public String spender;
+    public String operator;
 
-    @JsonProperty("raw_tx")
-    public RawTx[] rawTx; // RawTx
+    @JsonProperty("custody_wallet_name")
+    public String custodyWalletName;
+
+    @JsonProperty("gas_station_child_id")
+    public String gasStationChildID;
+
+    @JsonProperty("raw_tx_hex")
+    public String rawTxHex;
     public String note;
+
+    @JsonProperty("raw_tx_info")
+    public String rawTxInfo;
 
     public String getCoboID() {
         return coboID;
@@ -444,12 +484,36 @@ class KeySignExtraInfo implements Serializable {
         this.spender = spender;
     }
 
-    public RawTx[] getRawTx() {
-        return rawTx;
+    public String getOperator() {
+        return operator;
     }
 
-    public void setRawTx(RawTx[] rawTx) {
-        this.rawTx = rawTx;
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public String getCustodyWalletName() {
+        return custodyWalletName;
+    }
+
+    public void setCustodyWalletName(String custodyWalletName) {
+        this.custodyWalletName = custodyWalletName;
+    }
+
+    public String getGasStationChildID() {
+        return gasStationChildID;
+    }
+
+    public void setGasStationChildID(String gasStationChildID) {
+        this.gasStationChildID = gasStationChildID;
+    }
+
+    public String getRawTxHex() {
+        return rawTxHex;
+    }
+
+    public void setRawTxHex(String rawTxHex) {
+        this.rawTxHex = rawTxHex;
     }
 
     public String getNote() {
@@ -459,6 +523,15 @@ class KeySignExtraInfo implements Serializable {
     public void setNote(String note) {
         this.note = note;
     }
+
+    public String getRawTxInfo() {
+        return rawTxInfo;
+    }
+
+    public void setRawTxInfo(String rawTxInfo) {
+        this.rawTxInfo = rawTxInfo;
+    }
+
 }
 
 class ToAddressDetail implements Serializable{
@@ -528,37 +601,6 @@ class ExtraParameters implements Serializable {
 
     public void setInputsToExclude(Input[] inputsToExclude) {
         this.inputsToExclude = inputsToExclude;
-    }
-}
-
-class RawTx implements Serializable {
-    @JsonProperty("raw_tx")
-    public String rawTx;
-
-    @JsonProperty("derivation_path")
-    public String derivationPath;
-
-    public RawTx() {}
-
-    public RawTx(String rawTx, String derivationPath) {
-        this.rawTx = rawTx;
-        this.derivationPath = derivationPath;
-    }
-
-    public String getRawTx() {
-        return rawTx;
-    }
-
-    public void setRawTx(String rawTx) {
-        this.rawTx = rawTx;
-    }
-
-    public String getDerivationPath() {
-        return derivationPath;
-    }
-
-    public void setDerivationPath(String derivationPath) {
-        this.derivationPath = derivationPath;
     }
 }
 
@@ -652,10 +694,12 @@ class KeyReshareDetail implements Serializable{
     }
 }
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class KeyReshareExtraInfo implements Serializable{
-
     @JsonProperty("cobo_id")
     public String coboID;
+    @JsonProperty("api_request_id")
+    public String apiRequestID;
 
     public String getCoboID() {
         return coboID;
@@ -663,5 +707,13 @@ class KeyReshareExtraInfo implements Serializable{
 
     public void setCoboID(String coboID) {
         this.coboID = coboID;
+    }
+
+    public String getApiRequestID() {
+        return apiRequestID;
+    }
+
+    public void setApiRequestID(String apiRequestID) {
+        this.apiRequestID = apiRequestID;
     }
 }

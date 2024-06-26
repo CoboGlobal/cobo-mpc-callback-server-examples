@@ -70,29 +70,34 @@ type KeyReshareDetail struct {
 }
 
 type KeyGenExtraInfo struct {
-	CoboID string `json:"cobo_id"`
+	CoboID       string `json:"cobo_id"`
+	ApiRequestID string `json:"api_request_id"`
 }
 
 type KeySignExtraInfo struct {
-	CoboID           string         `json:"cobo_id"`
-	ApiRequestID     string         `json:"api_request_id"`
-	TransactionType  int            `json:"transaction_type"` // TransactionTypeEnum
-	Operation        int            `json:"operation"`        // TransactionOperationEnum
-	Coin             string         `json:"coin"`
-	Decimal          int            `json:"decimal"`
-	FromAddress      string         `json:"from_address"`
-	Amount           string         `json:"amount"`
-	ToAddress        string         `json:"to_address"`
-	ToAddressDetails string         `json:"to_address_details"` // json, []KeySignToAddressDetail
-	Fee              int            `json:"fee"`
-	GasPrice         int            `json:"gas_price"`
-	GasLimit         int            `json:"gas_limit"`
-	ExtraParameters  string         `json:"extra_parameters"` // json
-	ReplaceCoboID    string         `json:"replace_cobo_id"`
-	ApiKey           string         `json:"api_key"`
-	Spender          string         `json:"spender"`
-	RawTx            []KeySignRawTx `json:"raw_tx"`
-	Note             string         `json:"note"`
+	CoboID            string `json:"cobo_id"`
+	ApiRequestID      string `json:"api_request_id"`
+	TransactionType   int    `json:"transaction_type"` // TransactionTypeEnum
+	Operation         int    `json:"operation"`        // TransactionOperationEnum
+	Coin              string `json:"coin"`
+	Decimal           int    `json:"decimal"`
+	FromAddress       string `json:"from_address"`
+	Amount            string `json:"amount"`
+	ToAddress         string `json:"to_address"`
+	ToAddressDetails  string `json:"to_address_details"` // json, []KeySignToAddressDetail
+	Fee               int    `json:"fee"`
+	GasPrice          int    `json:"gas_price"`
+	GasLimit          int    `json:"gas_limit"`
+	ExtraParameters   string `json:"extra_parameters"` // json
+	ReplaceCoboID     string `json:"replace_cobo_id"`
+	ApiKey            string `json:"api_key"`
+	Spender           string `json:"spender"`
+	Operator          string `json:"operator"`
+	CustodyWalletName string `json:"custody_wallet_name"`
+	GasStationChildID string `json:"gas_station_child_id"`
+	RawTxHex          string `json:"raw_tx_hex"`
+	Note              string `json:"note"`
+	RawTxInfo         string `json:"raw_tx_info"`
 }
 
 type KeySignToAddressDetail struct {
@@ -110,13 +115,9 @@ type Input struct {
 	VoutN  int    `json:"vout_n"`
 }
 
-type KeySignRawTx struct {
-	RawTx          string `json:"raw_tx"`
-	DerivationPath string `json:"derivation_path"`
-}
-
 type KeyReshareExtraInfo struct {
-	CoboID string `json:"cobo_id"`
+	CoboID       string `json:"cobo_id"`
+	ApiRequestID string `json:"api_request_id"`
 }
 
 type CallBackRequest struct {

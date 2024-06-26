@@ -152,6 +152,7 @@ class KeyGenDetail implements Serializable{
     }
 }
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class KeyGenExtraInfo implements Serializable{
     @JsonProperty("cobo_id")
     public String coboID;
@@ -290,6 +291,7 @@ enum TransactionOperation
     CONTRACT_CALL, // 200
 }
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class KeySignExtraInfo implements Serializable {
     @JsonProperty("cobo_id")
     public String coboID;
@@ -692,8 +694,8 @@ class KeyReshareDetail implements Serializable{
     }
 }
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class KeyReshareExtraInfo implements Serializable{
-
     @JsonProperty("cobo_id")
     public String coboID;
     @JsonProperty("api_request_id")

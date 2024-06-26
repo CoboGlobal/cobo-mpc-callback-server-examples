@@ -55,6 +55,8 @@ type KeySignDetail struct {
 	Bip32PathList []string `json:"bip32_path_list,omitempty"`
 	MsgHashList   []string `json:"msg_hash_list,omitempty"`
 	TweakList     []string `json:"tweak_list,omitempty"`
+	SignatureType int32    `json:"signature_type,omitempty"`
+	TssProtocol   int32    `json:"tss_protocol,omitempty"`
 	TaskID        string   `json:"task_id,omitempty"`
 }
 

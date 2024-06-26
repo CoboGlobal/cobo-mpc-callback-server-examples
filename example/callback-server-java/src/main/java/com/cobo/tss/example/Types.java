@@ -195,6 +195,12 @@ class KeySignDetail implements Serializable{
     @JsonProperty("tweak_list")
     public String[] tweakList;
 
+    @JsonProperty("signature_type")
+    public int signatureType;
+
+    @JsonProperty("tss_protocol")
+    public int tssProtocol;
+
     @JsonProperty("task_id")
     public String taskID;
 
@@ -245,6 +251,18 @@ class KeySignDetail implements Serializable{
     public void setTweakList(String[] tweakList) {
         this.tweakList = tweakList;
     }
+
+    public int getSignatureType() {
+        return signatureType;
+    }
+
+    public void setSignatureType(int signatureType) { this.signatureType = signatureType; }
+
+    public int getTssProtocol() {
+        return tssProtocol;
+    }
+
+    public void setTssProtocol(int tssProtocol) { this.tssProtocol = tssProtocol; }
 
     public String getTaskID() {
         return taskID;
